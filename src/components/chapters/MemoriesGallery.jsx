@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Heart, Star, ZoomIn, X } from 'lucide-react';
 
 const memories = [
@@ -159,7 +160,7 @@ function Polaroid({ memory, onClick }) {
         }}
       >
         <img
-          src={`images/${memory.file}`}
+          src={`/${memory.file}`}
           alt={memory.title}
           style={{
             width: '100%',
@@ -210,15 +211,19 @@ function Polaroid({ memory, onClick }) {
 }
 
 function LightBox({ memory, onClose }) {
-  if (!memory) return null;
-  return (
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!memory || !mounted) return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto"
       style={{ background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(16px)' }}
       onClick={onClose}
     >
       <div
-        className="relative w-full chapter-enter"
+        className="relative w-full chapter-enter my-auto"
         style={{ maxWidth: '580px' }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -246,14 +251,14 @@ function LightBox({ memory, onClose }) {
         >
           {/* Full image — no cropping */}
           <img
-            src={`images/${memory.file}`}
+            src={`/${memory.file}`}
             alt={memory.title}
             style={{
               width: '100%',
               height: 'auto',
               display: 'block',
               objectFit: 'contain',
-              maxHeight: '480px',
+              maxHeight: '50vh',
               background: '#fff0f7',
             }}
             onError={(e) => { e.target.style.display = 'none'; }}
@@ -284,7 +289,8 @@ function LightBox({ memory, onClose }) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
