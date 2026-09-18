@@ -1,0 +1,308 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   ROOT & BASE — HD Barbie Pink-White System
+   ============================================= */
+:root {
+  --pink-vivid:   #ff2e63;
+  --pink-hot:     #ff69b4;
+  --pink-deep:    #d81b60;
+  --pink-soft:    #ffb3d9;
+  --pink-pale:    #ffe0f0;
+  --rose-dark:    #2d0020;
+  --rose-medium:  #6b1040;
+  --rose-accent:  #c41c6e;
+  --text-body:    #2d0020;
+  --text-heading: #1a000f;
+  --text-sub:     #7a2050;
+  --text-muted:   #b04070;
+  --bg-white:     #ffffff;
+  --bg-blush:     #fff0f7;
+  --gold:         #d4af37;
+}
+
+/* ============ HTML / BODY ============ */
+html {
+  font-size: 18px;          /* base size — bigger than browser default 16px */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;          /* 18px */
+  line-height: 1.75;
+  color: var(--text-body);
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 0%,   #ffd6e8 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 90% 100%,  #ffb3d4 0%, transparent 55%),
+    radial-gradient(ellipse 60% 80% at 50% 50%,  #fff5fa 0%, transparent 80%),
+    linear-gradient(175deg, #ffffff 0%, #fff0f7 40%, #ffe8f2 80%, #ffd6e7 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ============ GLOBAL ELEMENT RESETS ============ */
+/* Force all text elements to dark-on-light by default */
+p, span, li, td, th, caption, figcaption, label, blockquote, pre, address {
+  color: var(--text-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  color: var(--text-heading);
+  line-height: 1.15;
+}
+
+input, textarea, select {
+  color: var(--text-body) !important;
+  caret-color: var(--pink-vivid);
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(180, 60, 110, 0.45);
+}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(255, 105, 180, 0.1); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff2e63, #ff69b4);
+  border-radius: 3px;
+}
+
+/* ============================================================
+   OVERRIDE ALL TAILWIND PINK LIGHT CLASSES
+   (Tailwind generates light pinks meant for dark backgrounds.
+    We remap every one to a dark, readable equivalent.)
+   ============================================================ */
+.text-pink-50,  .text-pink-100  { color: #5a1535 !important; }
+.text-pink-200  { color: #6b1a40 !important; }
+.text-pink-300  { color: #8b2252 !important; }
+.text-pink-400  { color: #a82b5e !important; }
+
+/* Opacity variants — Tailwind generates these as actual classes */
+.text-pink-200\/70 { color: rgba(100, 25, 60, 0.80) !important; }
+.text-pink-200\/80 { color: rgba(90,  20, 55, 0.88) !important; }
+.text-pink-300\/70 { color: rgba(120, 30, 70, 0.80) !important; }
+.text-pink-300\/80 { color: rgba(110, 25, 65, 0.88) !important; }
+.text-pink-400\/40 { color: rgba(140, 35, 78, 0.55) !important; }
+.text-pink-400\/50 { color: rgba(150, 38, 82, 0.65) !important; }
+.text-pink-400\/60 { color: rgba(155, 40, 85, 0.72) !important; }
+.text-pink-400\/70 { color: rgba(155, 38, 83, 0.82) !important; }
+
+/* text-white — ONLY override outside of intentional white-on-pink buttons */
+/* We target specific chapter content, not buttons */
+.chapter-enter .text-white:not(button):not([class*="btn"]) { color: #2d0020 !important; }
+.glass .text-white, .glass-pink .text-white, .glass-warm .text-white { color: #2d0020 !important; }
+
+/* Italic/placeholder labels */
+.text-pink-400\/40.font-cormorant { color: rgba(140, 35, 78, 0.60) !important; }
+
+
+/* ============================================================
+   GLASSMORPHISM — white-glass on pink-white bg
+   ============================================================ */
+.glass {
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(255, 105, 180, 0.22);
+  box-shadow:
+    0  4px  24px rgba(255,  46,  99, 0.08),
+    0  1px   0  rgba(255, 255, 255, 0.95) inset,
+    0 -1px   0  rgba(255, 105, 180, 0.08) inset;
+  color: var(--text-body);
+}
+
+.glass-pink {
+  background: rgba(255, 200, 225, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(255, 46, 99, 0.28);
+  box-shadow: 0 4px 24px rgba(255, 46, 99, 0.12);
+  color: var(--text-heading);
+}
+
+.glass-warm {
+  background: rgba(255, 248, 252, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(212, 175, 55, 0.22);
+  box-shadow: 0 4px 20px rgba(255, 150, 180, 0.08);
+  color: var(--text-body);
+}
+
+/* Text inside glass must always be dark */
+.glass p, .glass span, .glass h1, .glass h2, .glass h3,
+.glass-pink p, .glass-pink span, .glass-pink h1, .glass-pink h2, .glass-pink h3,
+.glass-warm p, .glass-warm span, .glass-warm h1, .glass-warm h2, .glass-warm h3 {
+  color: var(--text-body);
+}
+
+/* ============================================================
+   GLOW EFFECTS
+   ============================================================ */
+.pink-glow {
+  box-shadow: 0 0 18px rgba(255,  46,  99, 0.22),
+              0 4px 24px rgba(255, 105, 180, 0.18);
+}
+
+.pink-glow-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.pink-glow-hover:hover {
+  box-shadow: 0 0 30px rgba(255,  46,  99, 0.32),
+              0 8px 36px rgba(255, 105, 180, 0.22);
+  transform: translateY(-4px);
+}
+
+/* ============================================================
+   GRADIENT HEADLINE TEXT — vivid hot pink
+   ============================================================ */
+.gradient-text {
+  background: linear-gradient(135deg, #d81b60 0%, #ff2e63 45%, #ff69b4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 6px rgba(255, 46, 99, 0.18));
+}
+
+.gold-text {
+  background: linear-gradient(135deg, #b8870b 0%, #d4af37 50%, #e8c840 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================
+   PARCHMENT CARDS — warm cream, always dark text
+   ============================================================ */
+.parchment-bg {
+  background: linear-gradient(135deg, #fdf6ec 0%, #faecd8 50%, #fef4e8 100%);
+  color: #4a2008;
+}
+
+.parchment-bg * { color: #5a2a10; }
+.parchment-bg strong { color: #c41c6e; }
+
+/* ============================================================
+   POLAROID FRAME
+   ============================================================ */
+.polaroid {
+  background: white;
+  box-shadow:
+    0 6px 28px rgba(255,  46,  99, 0.16),
+    0 2px  8px rgba(0, 0, 0, 0.06);
+  border-radius: 3px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.polaroid:hover {
+  box-shadow:
+    0 18px 56px rgba(255,  46,  99, 0.28),
+    0  6px 20px rgba(0, 0, 0, 0.10);
+  z-index: 10;
+}
+
+/* ============================================================
+   CHAPTER LABEL / SECTION IDENTIFIER
+   ============================================================ */
+.chapter-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.67rem;    /* ~12px */
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--rose-accent);
+}
+
+/* ============================================================
+   HD TYPOGRAPHY SCALE
+   Use these classes throughout chapters for consistent sizing
+   ============================================================ */
+.type-hero {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.type-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.type-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.type-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  line-height: 1.85;
+}
+
+.type-caption {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes floatHeart {
+  0%   { transform: translateY(0)    scale(1);   opacity: 1; }
+  100% { transform: translateY(-80px) scale(0.5); opacity: 0; }
+}
+.float-heart { animation: floatHeart 2s ease-out forwards; }
+
+@keyframes chapterFadeIn {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.chapter-enter { animation: chapterFadeIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+@keyframes unfold {
+  from { transform: scaleY(0); transform-origin: top; }
+  to   { transform: scaleY(1); transform-origin: top; }
+}
+.letter-unfold { animation: unfold 0.5s ease-out forwards; }
+
+@keyframes reelSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.reel-spin { animation: reelSpin 2s linear infinite; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px) rotate(-2deg); }
+  40% { transform: translateX(8px)  rotate(2deg);  }
+  60% { transform: translateX(-5px) rotate(-1deg); }
+  80% { transform: translateX(5px)  rotate(1deg);  }
+}
+.vault-shake { animation: shake 0.5s ease-in-out; }
+
+/* ============================================================
+   FONT UTILITIES
+   ============================================================ */
+.font-cormorant { font-family: 'Cormorant Garamond', serif !important; }
+.font-playfair  { font-family: 'Playfair Display',  serif !important; }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.page-content { min-height: 100vh; }
+* { box-sizing: border-box; }
